@@ -83,9 +83,10 @@ namespace MusicApplication
                 }
                 else if (isPlaying) 
                 {
-                    SongTimer.Enabled = false;
+                    
                     axWindowsMediaPlayer1.Ctlcontrols.pause();
                     Console.WriteLine("pause song");
+                    SongTimer.Enabled = false;
                     isPlaying = false;
                 }
 
@@ -163,6 +164,7 @@ namespace MusicApplication
             try
             {
                 TotalDurationLabel.Text = axWindowsMediaPlayer1.currentMedia.durationString;
+                UpdateSlider();
                 Console.WriteLine(axWindowsMediaPlayer1.currentMedia.duration);
             }
             catch 
@@ -177,10 +179,22 @@ namespace MusicApplication
             UpdateSongTimers();
         }
 
+        // Function for setting song information onto screen / Increasing updateSlider value.
         private void UpdateSongTimers() 
         {
             CurrentDurationLabel.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
+            SongProgressBar.Value = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
         }
-        // Function for setting song information onto screen.
+        // Set Slider up for next song
+        // FINISH GETTING SLIDER TO WORK
+        // WITH SONG AND ALLOW USER TO SKIP SONG DEPEDING ON SELECTION ON SLIDER
+        private void UpdateSlider() 
+        {
+            SongProgressBar.Maximum = (int)axWindowsMediaPlayer1.currentMedia.duration;
+            SongProgressBar.Minimum = 0;
+            SongProgressBar.Value = 0;
+
+        }
+        
     }
-}
+}   

@@ -9,6 +9,9 @@ namespace MusicApplication
 {
     internal class MusicList
     {
+        // Controls music playlist
+        // For next song / prev song
+        // Check song data
         public List<string> musicFileNames;
         public List<DirectoryInfo> musicDirectory;
         public int itr = 0;
@@ -20,7 +23,7 @@ namespace MusicApplication
             musicFileNames = new List<string>();
             Console.WriteLine("Created new music List");
         }
-
+        // Add folder music into list
         public void AddDirectoryMusic(DirectoryInfo d) 
         {   
             // Access all mp3 files in directory

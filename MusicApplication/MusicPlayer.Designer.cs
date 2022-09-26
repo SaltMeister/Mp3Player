@@ -119,6 +119,7 @@
             this.SongProgressBar.Name = "SongProgressBar";
             this.SongProgressBar.Size = new System.Drawing.Size(577, 45);
             this.SongProgressBar.TabIndex = 5;
+            this.SongProgressBar.TabStop = false;
             this.SongProgressBar.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // PauseButton
