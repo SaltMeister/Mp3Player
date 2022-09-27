@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace MusicApplication
@@ -21,14 +22,19 @@ namespace MusicApplication
         private DirectoryInfo d;
         // Initialize new class for the music list to be used.
         private MusicList musicList;
-
+        SongSlider songSlider;
         // Sound variables
         //-
         private bool isPlaying = false;
         public MusicPlayer()
         {
+            songSlider = new SongSlider(new Size(500, 50));
+            Controls.Add(songSlider);
+            d = new DirectoryInfo(@"D:\\Internet Explorer downloads\\Music");
             InitializeComponent();
             musicList = new MusicList(this);
+
+            musicList.AddDirectoryMusic(d);
 
         }
 
@@ -113,9 +119,10 @@ namespace MusicApplication
         // Intend to go to previous song
         private void PrevButton_Click_1(object sender, EventArgs e)
         {
-            Console.WriteLine("Open the folder");
+            // Folder extraction code
+            /*            Console.WriteLine("Open the folder");
             this.folderBrowserDialog1 = new FolderBrowserDialog();
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK) 
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 this.selectedPath = folderBrowserDialog1.SelectedPath;
                 Console.WriteLine(selectedPath);
@@ -124,8 +131,21 @@ namespace MusicApplication
 
                 // Call MusicList to add music to it.
                 musicList.AddDirectoryMusic(d);
+            }*/
+
+            musicList.PrevSong();
+            // Media player play audio
+            Console.WriteLine("Play Music from : " + d + musicList.CurrentSongName());
+            try
+            {
+                axWindowsMediaPlayer1.URL = @d + @"\" + musicList.CurrentSongName();
+                SetSongPlaying();
             }
-                
+            catch
+            {
+                Console.WriteLine("Directory not found");
+                isPlaying = false;
+            }
         }
 
         // Play next song in music List.
@@ -137,8 +157,7 @@ namespace MusicApplication
             try
             {
                 axWindowsMediaPlayer1.URL = @d + @"\" + musicList.CurrentSongName();
-                SetSongLabelName();
-                isPlaying = true;
+                SetSongPlaying();
             }
             catch
             {
@@ -163,8 +182,7 @@ namespace MusicApplication
             // Change total duration text on change
             try
             {
-                TotalDurationLabel.Text = axWindowsMediaPlayer1.currentMedia.durationString;
-                UpdateSlider();
+                SetSongPlaying();
                 Console.WriteLine(axWindowsMediaPlayer1.currentMedia.duration);
             }
             catch 
@@ -195,6 +213,45 @@ namespace MusicApplication
             SongProgressBar.Value = 0;
 
         }
-        
+
+        // On Movement of slider
+        private void SongProgressBar_Scroll(object sender, EventArgs e)
+        {
+            Console.WriteLine("Slider manual adjusted");
+            // Adjust media player current duration to value
+            axWindowsMediaPlayer1.Ctlcontrols.currentPosition = SongProgressBar.Value;
+        }
+
+        // Set Slider track position to mouse position
+        private void SongProgressBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            // get mous pos and align it to the position on trackbar and set trackbar value
+            float valuePercent;
+            Console.WriteLine(e.X);
+            valuePercent = (e.X / (float)SongProgressBar.Size.Width);
+            Console.WriteLine(valuePercent + " new Value = " + SongProgressBar.Maximum * valuePercent);
+            float newValue = SongProgressBar.Maximum * valuePercent;
+
+            SongProgressBar.Value = (int)newValue;
+            axWindowsMediaPlayer1.Ctlcontrols.currentPosition = SongProgressBar.Value;
+        }
+
+        // Changed to ui when new song plays
+        private void SetSongPlaying() 
+        {
+            // Set Song to play by default
+            if (!isPlaying)
+                isPlaying = true;
+            if (!SongProgressBar.Enabled)
+                SongProgressBar.Enabled = true;
+            axWindowsMediaPlayer1.Ctlcontrols.play();
+
+            // Set Total duration
+            TotalDurationLabel.Text = axWindowsMediaPlayer1.currentMedia.durationString;
+            
+            UpdateSongTimers();
+            UpdateSlider();
+            SetSongLabelName();
+        }
     }
 }   

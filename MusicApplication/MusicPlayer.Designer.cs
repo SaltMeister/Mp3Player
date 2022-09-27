@@ -71,10 +71,10 @@
             this.MusicControllerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(196)))), ((int)(((byte)(153)))));
             this.MusicControllerPanel.Controls.Add(this.CurrentDurationLabel);
             this.MusicControllerPanel.Controls.Add(this.TotalDurationLabel);
-            this.MusicControllerPanel.Controls.Add(this.SongProgressBar);
             this.MusicControllerPanel.Controls.Add(this.PauseButton);
             this.MusicControllerPanel.Controls.Add(this.NextButton);
             this.MusicControllerPanel.Controls.Add(this.PrevButton);
+            this.MusicControllerPanel.Controls.Add(this.SongProgressBar);
             this.MusicControllerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.MusicControllerPanel.Location = new System.Drawing.Point(0, 487);
             this.MusicControllerPanel.Margin = new System.Windows.Forms.Padding(0);
@@ -114,13 +114,20 @@
             // 
             // SongProgressBar
             // 
-            this.SongProgressBar.BackColor = System.Drawing.Color.DimGray;
-            this.SongProgressBar.Location = new System.Drawing.Point(107, 3);
+            this.SongProgressBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(196)))), ((int)(((byte)(153)))));
+            this.SongProgressBar.Enabled = false;
+            this.SongProgressBar.LargeChange = 0;
+            this.SongProgressBar.Location = new System.Drawing.Point(108, 17);
+            this.SongProgressBar.Margin = new System.Windows.Forms.Padding(0);
+            this.SongProgressBar.Maximum = 100;
             this.SongProgressBar.Name = "SongProgressBar";
             this.SongProgressBar.Size = new System.Drawing.Size(577, 45);
-            this.SongProgressBar.TabIndex = 5;
+            this.SongProgressBar.SmallChange = 3;
+            this.SongProgressBar.TabIndex = 0;
             this.SongProgressBar.TabStop = false;
             this.SongProgressBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.SongProgressBar.Scroll += new System.EventHandler(this.SongProgressBar_Scroll);
+            this.SongProgressBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongProgressBar_MouseDown);
             // 
             // PauseButton
             // 
