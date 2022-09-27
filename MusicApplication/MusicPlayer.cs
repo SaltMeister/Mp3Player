@@ -28,8 +28,11 @@ namespace MusicApplication
         private bool isPlaying = false;
         public MusicPlayer()
         {
+            // Create new song Slider
             songSlider = new SongSlider(new Size(500, 50));
             Controls.Add(songSlider);
+
+
             d = new DirectoryInfo(@"D:\\Internet Explorer downloads\\Music");
             InitializeComponent();
             musicList = new MusicList(this);

@@ -7,13 +7,18 @@ namespace MusicApplication
 {
     internal class SongSlider : Control
     {
-        private int numberTicks = 100;
+        private int trackWidth;
+        private int trackHeight;
+        
         private Rectangle fillRectangle = new Rectangle();
         private Rectangle trackRectangle = new Rectangle();
-        private Rectangle ticksRectangle = new Rectangle();
         private Rectangle thumbRectangle = new Rectangle();
-        private int currentTickPosition = 0;
-        private float tickSpace = 0;
+
+        private float value = 0;
+        private float maxValue = 100;
+
+        private bool isEnabled = false;
+
         private bool thumbClicked = false;
         private TrackBarThumbState thumbState =
             TrackBarThumbState.Normal;
@@ -26,6 +31,8 @@ namespace MusicApplication
 
             this.DoubleBuffered = true;
 
+            this.trackWidth = ClientRectangle.Width - 20;
+            this.trackHeight = 5;
             // Calculate the initial sizes of the bar, 
             // thumb and ticks.
             SetupTrackBar();
@@ -40,47 +47,24 @@ namespace MusicApplication
             using (Graphics g = this.CreateGraphics())
             {
                 // Set up size of the fill rectangle.
-                fillRectangle.X = ClientRectangle.X;
+                fillRectangle.X = ClientRectangle.X + 10;
                 fillRectangle.Y = ClientRectangle.Y + 15;
                 fillRectangle.Width = 0;
-                fillRectangle.Height = 10;
+                fillRectangle.Height = trackHeight;
 
                 // Calculate the size of the track bar.
-                trackRectangle.X = ClientRectangle.X;
+                trackRectangle.X = ClientRectangle.X + 10;
                 trackRectangle.Y = ClientRectangle.Y + 15;
-                trackRectangle.Width = ClientRectangle.Width;
-                trackRectangle.Height = 10;
-
-                // Calculate the size of the rectangle in which to 
-                // draw the ticks.
-                ticksRectangle.X = trackRectangle.X + 4;
-                ticksRectangle.Y = trackRectangle.Y - 8;
-                ticksRectangle.Width = trackRectangle.Width - 8;
-                ticksRectangle.Height = 0;
-
-                tickSpace = ((float)ticksRectangle.Width - 1) /
-                    ((float)numberTicks - 1);
+                trackRectangle.Width = trackWidth;
+                trackRectangle.Height = trackHeight;
 
                 // Calculate the size of the thumb.
                 thumbRectangle.Size =
                     TrackBarRenderer.GetTopPointingThumbSize(g,
                     TrackBarThumbState.Normal);
 
-                thumbRectangle.X = CurrentTickXCoordinate() - 2;
-                thumbRectangle.Y = trackRectangle.Y - 5;
-            }
-        }
-
-        private int CurrentTickXCoordinate()
-        {
-            if (tickSpace == 0)
-            {
-                return 0;
-            }
-            else
-            {
-                return ((int)Math.Round(tickSpace) *
-                    currentTickPosition);
+                thumbRectangle.X = ClientRectangle.X + 10;
+                thumbRectangle.Y = trackRectangle.Y - 7;
             }
         }
 
@@ -107,17 +91,41 @@ namespace MusicApplication
 /*            TrackBarRenderer.DrawHorizontalTicks(e.Graphics,
                 ticksRectangle, numberTicks, EdgeStyle.Raised);*/
         }
-
+        private void MoveFillBarToThumb() 
+        {
+            fillRectangle.Width = thumbRectangle.X;
+        }
+        private void UpdateValue() 
+        {
+            // Value equal to percent of the bar.
+            value = thumbRectangle.X / (float)trackRectangle.Width;
+            Console.WriteLine(value);
+        }
+        private void MoveThumb(int x) 
+        {
+            if (x > trackRectangle.X && x < trackRectangle.Width)
+                thumbRectangle.X = x;
+        }
         // Determine whether the user has clicked the track bar thumb.
         protected override void OnMouseDown(MouseEventArgs e)
         {
             if (!TrackBarRenderer.IsSupported)
                 return;
-
+            if (!isEnabled)
+                return;
+            // Check if mouse position is on the slider
             if (this.thumbRectangle.Contains(e.Location))
             {
                 thumbClicked = true;
                 thumbState = TrackBarThumbState.Pressed;
+            }
+            // Handle moving thumb rectangle to wherever user selects.
+            else if (ClientRectangle.Contains(e.Location)) 
+            {
+                //thumbRectangle.X = e.X - 5;
+                MoveThumb(e.X);
+                UpdateValue();
+                MoveFillBarToThumb();
             }
 
             this.Invalidate();
@@ -127,13 +135,15 @@ namespace MusicApplication
         protected override void OnMouseUp(MouseEventArgs e)
         {
             if (!TrackBarRenderer.IsSupported)
+            return;
+            if (!isEnabled)
                 return;
-
             if (thumbClicked == true)
             {
+                //Console.WriteLine(e.X);
                 if (e.Location.X > trackRectangle.X &&
                     e.Location.X < (trackRectangle.X +
-                    trackRectangle.Width - thumbRectangle.Width))
+                    trackRectangle.Width))
                 {
                     thumbClicked = false;
                     thumbState = TrackBarThumbState.Hot;
@@ -149,29 +159,14 @@ namespace MusicApplication
         {
             if (!TrackBarRenderer.IsSupported)
                 return;
-
+            if (!isEnabled)
+                return;
             // The user is moving the thumb.
             if (thumbClicked == true)
             {
-                // Track movements to the next tick to the right, if 
-                // the cursor has moved halfway to the next tick.
-                if (currentTickPosition < numberTicks - 1 &&
-                    e.Location.X > CurrentTickXCoordinate() +
-                    (int)(tickSpace))
-                {
-                    currentTickPosition++;
-                }
-
-                // Track movements to the next tick to the left, if 
-                // cursor has moved halfway to the next tick.
-                else if (currentTickPosition > 0 &&
-                    e.Location.X < CurrentTickXCoordinate() -
-                    (int)(tickSpace / 2))
-                {
-                    currentTickPosition--;
-                }
-
-                thumbRectangle.X = CurrentTickXCoordinate();
+                MoveThumb(e.X);
+                UpdateValue();
+                MoveFillBarToThumb();
             }
 
             // The cursor is passing over the track.
@@ -181,7 +176,44 @@ namespace MusicApplication
                     TrackBarThumbState.Hot : TrackBarThumbState.Normal;
             }
 
+
             Invalidate();
+        }
+
+
+        // Public Methods
+        // Call to update slide for song
+        public void SetValue(float currentDuration, float totalDuration)
+        {
+            // Get Percentage of input
+            float percent;
+
+            percent = currentDuration / totalDuration;
+            percent = percent * (float)trackRectangle.Width;
+
+            MoveThumb((int)percent);
+            MoveFillBarToThumb();
+
+            Console.WriteLine(percent);
+        }
+        public void Enable() 
+        {
+            isEnabled = true;
+        }
+        public void Disable() 
+        {
+            isEnabled = false;
+        }
+        // Reset to default position on slider
+        public void Reset() 
+        {
+            value = 0;
+            thumbRectangle.X = ClientRectangle.X + 10;
+            MoveFillBarToThumb();
+        }
+        public float GetValue() 
+        {
+            return value;
         }
     }
 }
