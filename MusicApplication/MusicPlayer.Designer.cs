@@ -34,10 +34,10 @@
             this.MusicControllerPanel = new System.Windows.Forms.Panel();
             this.CurrentDurationLabel = new System.Windows.Forms.Label();
             this.TotalDurationLabel = new System.Windows.Forms.Label();
-            this.SongProgressBar = new System.Windows.Forms.TrackBar();
             this.PauseButton = new System.Windows.Forms.Button();
             this.NextButton = new System.Windows.Forms.Button();
             this.PrevButton = new System.Windows.Forms.Button();
+            this.SongProgressBar = new System.Windows.Forms.TrackBar();
             this.SongTitleLabel = new System.Windows.Forms.Label();
             this.SelectMusicFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
@@ -112,23 +112,6 @@
             this.TotalDurationLabel.Text = "TotalDurationLabel";
             this.TotalDurationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // SongProgressBar
-            // 
-            this.SongProgressBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(196)))), ((int)(((byte)(153)))));
-            this.SongProgressBar.Enabled = false;
-            this.SongProgressBar.LargeChange = 0;
-            this.SongProgressBar.Location = new System.Drawing.Point(108, 17);
-            this.SongProgressBar.Margin = new System.Windows.Forms.Padding(0);
-            this.SongProgressBar.Maximum = 100;
-            this.SongProgressBar.Name = "SongProgressBar";
-            this.SongProgressBar.Size = new System.Drawing.Size(577, 45);
-            this.SongProgressBar.SmallChange = 3;
-            this.SongProgressBar.TabIndex = 0;
-            this.SongProgressBar.TabStop = false;
-            this.SongProgressBar.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.SongProgressBar.Scroll += new System.EventHandler(this.SongProgressBar_Scroll);
-            this.SongProgressBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongProgressBar_MouseDown);
-            // 
             // PauseButton
             // 
             this.PauseButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -165,6 +148,23 @@
             this.PrevButton.UseVisualStyleBackColor = true;
             this.PrevButton.Click += new System.EventHandler(this.PrevButton_Click_1);
             // 
+            // SongProgressBar
+            // 
+            this.SongProgressBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(196)))), ((int)(((byte)(153)))));
+            this.SongProgressBar.Enabled = false;
+            this.SongProgressBar.LargeChange = 0;
+            this.SongProgressBar.Location = new System.Drawing.Point(108, 17);
+            this.SongProgressBar.Margin = new System.Windows.Forms.Padding(0);
+            this.SongProgressBar.Maximum = 100;
+            this.SongProgressBar.Name = "SongProgressBar";
+            this.SongProgressBar.Size = new System.Drawing.Size(577, 45);
+            this.SongProgressBar.SmallChange = 3;
+            this.SongProgressBar.TabIndex = 0;
+            this.SongProgressBar.TabStop = false;
+            this.SongProgressBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.SongProgressBar.Scroll += new System.EventHandler(this.SongProgressBar_Scroll);
+            this.SongProgressBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongProgressBar_MouseDown);
+            // 
             // SongTitleLabel
             // 
             this.SongTitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -199,6 +199,7 @@
             // 
             // SongTimer
             // 
+            this.SongTimer.Interval = 1000;
             this.SongTimer.Tick += new System.EventHandler(this.SongTimer_Tick);
             // 
             // MusicPlayer

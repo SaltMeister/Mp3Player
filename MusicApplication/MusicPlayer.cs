@@ -142,7 +142,7 @@ namespace MusicApplication
             try
             {
                 axWindowsMediaPlayer1.URL = @d + @"\" + musicList.CurrentSongName();
-                SetSongPlaying();
+                //SetSongPlaying();
             }
             catch
             {
@@ -160,7 +160,7 @@ namespace MusicApplication
             try
             {
                 axWindowsMediaPlayer1.URL = @d + @"\" + musicList.CurrentSongName();
-                SetSongPlaying();
+                //SetSongPlaying();
             }
             catch
             {
@@ -185,6 +185,12 @@ namespace MusicApplication
             // Change total duration text on change
             try
             {
+                Console.WriteLine("SongSWiTCHED");
+                // Ignore Calls when song length is 0.
+                if (axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration == 0)
+                    return;
+
+                // Adjust the tracker to match the song.
                 SetSongPlaying();
                 Console.WriteLine(axWindowsMediaPlayer1.currentMedia.duration);
             }
@@ -204,17 +210,17 @@ namespace MusicApplication
         private void UpdateSongTimers() 
         {
             CurrentDurationLabel.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
-            SongProgressBar.Value = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
+
+            // Set Song Slider position
+            songSlider.SetValue((float)axWindowsMediaPlayer1.Ctlcontrols.currentPosition, (float)axWindowsMediaPlayer1.currentMedia.duration);
+            songSlider.MoveSliderToValue();
         }
         // Set Slider up for next song
         // FINISH GETTING SLIDER TO WORK
         // WITH SONG AND ALLOW USER TO SKIP SONG DEPEDING ON SELECTION ON SLIDER
         private void UpdateSlider() 
         {
-            SongProgressBar.Maximum = (int)axWindowsMediaPlayer1.currentMedia.duration;
-            SongProgressBar.Minimum = 0;
-            SongProgressBar.Value = 0;
-
+            //songSlider.SetValue( 10, (float)axWindowsMediaPlayer1.currentMedia.duration);
         }
 
         // On Movement of slider
@@ -253,7 +259,7 @@ namespace MusicApplication
             TotalDurationLabel.Text = axWindowsMediaPlayer1.currentMedia.durationString;
             
             UpdateSongTimers();
-            UpdateSlider();
+            //UpdateSlider();
             SetSongLabelName();
         }
     }
