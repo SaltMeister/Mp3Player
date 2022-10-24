@@ -160,6 +160,7 @@ namespace MusicApplication
             try
             {
                 axWindowsMediaPlayer1.URL = @d + @"\" + musicList.CurrentSongName();
+                isPlaying = true;
                 //SetSongPlaying();
             }
             catch
@@ -179,7 +180,7 @@ namespace MusicApplication
         {
             SongTitleLabel.Text = musicList.CurrentSongName();
         }
-
+        // GET ADJUSTING SLIDER = ADJUSTING SONG POSITION
         private void axWindowsMediaPlayer1_OpenStateChange(object sender, AxWMPLib._WMPOCXEvents_OpenStateChangeEvent e)
         {
             // Change total duration text on change
@@ -192,6 +193,8 @@ namespace MusicApplication
 
                 // Adjust the tracker to match the song.
                 SetSongPlaying();
+                UpdateSongTimers();
+                isPlaying = true;
                 Console.WriteLine(axWindowsMediaPlayer1.currentMedia.duration);
             }
             catch 
@@ -209,7 +212,10 @@ namespace MusicApplication
         // Function for setting song information onto screen / Increasing updateSlider value.
         private void UpdateSongTimers() 
         {
-            CurrentDurationLabel.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
+            if (axWindowsMediaPlayer1.Ctlcontrols.currentPosition < 1)
+                CurrentDurationLabel.Text = "00:00";
+            else
+                CurrentDurationLabel.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
 
             // Set Song Slider position
             songSlider.SetValue((float)axWindowsMediaPlayer1.Ctlcontrols.currentPosition, (float)axWindowsMediaPlayer1.currentMedia.duration);

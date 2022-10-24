@@ -25,7 +25,7 @@ namespace MusicApplication
 
         public SongSlider(Size trackBarSize)
         {
-            this.Location = new Point(100, 100);
+            this.Location = new Point(108, 17);
             this.Size = trackBarSize;
             this.BackColor = Color.DarkCyan;
 
@@ -215,6 +215,7 @@ namespace MusicApplication
             this.value = percent * 100;
             Console.WriteLine(percent + " --> " + value);
             this.Invalidate();
+            MoveFillBarToThumb();
         }
         public void MoveSliderToValue() 
         {
