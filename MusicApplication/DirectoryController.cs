@@ -47,12 +47,20 @@ namespace MusicApplication
         // Add given directory and write directory to list if not already within the file.
         public void AddDirectory(string path) 
         {
+            if (musicDirectorySet.TryGetValue(path, out string t)) 
+            {
+                Console.WriteLine("DIRECTORY ALREADY EXISTS");
+                return;
+            }
 
+            // Add music directory and write to file.
+            musicDirectorySet.Add(path);
+            WriteToFile(path);
         }
 
 
 
-
+        //--- END OF PUBLIC METHODS ---//
 
         // PRIVATE METHODS //
         // Checks for folder in Documents if N/A, Create one.
@@ -82,6 +90,7 @@ namespace MusicApplication
             return;
         }
 
+        // Reads directory file and addes all directories into directory list
         private void ReadFile() 
         {
             string[] lines = File.ReadAllLines(filePath);
@@ -103,8 +112,19 @@ namespace MusicApplication
                     Console.WriteLine("Added Directory to file");
                     sw.WriteLine(@"D:\\Internet Explorer downloads\\Music");
                 }
-                    sw.Close();
+                sw.Close();
             }
         }
+
+        // Writes to the directory file with given input.
+        private void WriteToFile(string path) 
+        {
+            using (StreamWriter sw = File.AppendText(filePath)) 
+            {
+                sw.WriteLine(path);
+                sw.Close();
+            }
+        }
+        //--- END OF PRIVATE METHODS ---//
     }
 }
