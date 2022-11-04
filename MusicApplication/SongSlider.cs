@@ -23,6 +23,18 @@ namespace MusicApplication
         private TrackBarThumbState thumbState =
             TrackBarThumbState.Normal;
 
+        public event EventHandler<PlayerValueChangedEventArgs> valueChanged;
+
+        private EventHandler thumbChanged;
+        public event EventHandler ThumbChanged 
+        {
+            add {
+                thumbChanged += value;
+            }
+            remove {
+                thumbChanged -= value;
+            }
+        }
         public SongSlider(Size trackBarSize)
         {
             this.Location = new Point(108, 17);
@@ -37,7 +49,7 @@ namespace MusicApplication
             // thumb and ticks.
             SetupTrackBar();
         }
-
+        //protected override void 
         // Calculate the sizes of the bar, thumb, and ticks rectangle.
         private void SetupTrackBar()
         {
@@ -102,17 +114,29 @@ namespace MusicApplication
         private void UpdateValue() 
         {
             // Value equal to percent of the bar.
-            value = ( (thumbRectangle.X - 6)/ (float)trackRectangle.Width) * 100;
+            this.value = ( (thumbRectangle.X - 6)/ (float)trackRectangle.Width) * 100;
 
 
             if (value > 100)
                 value = 100;
             else if (value < 0)
                 value = 0;
+            PlayerValueChangedEventArgs args = new PlayerValueChangedEventArgs();
+            ValueChanged(args);
 
+            args.NewValue = value;
+
+           // thumbChanged?.Invoke(this, );
             Console.WriteLine("New Value set to: " + value + " / 100");
         }
-
+        // VALUE CHANGED EVENT FOR THE SLIDER VALUE
+        protected void ValueChanged(PlayerValueChangedEventArgs e) 
+        {
+            Console.WriteLine("Event CALLED");
+            EventHandler<PlayerValueChangedEventArgs> handler = valueChanged;
+            if (handler != null)
+                handler(this, e);
+        }
         // Move thumb to given X position on screen.
         private void MoveThumb(int x) 
         {
@@ -124,19 +148,19 @@ namespace MusicApplication
                 Console.WriteLine("Lock to left");
                 Reset();
             }
-                
             else
                 Console.WriteLine("Out Of Range of: " + trackRectangle.X + " - " + (trackRectangle.Width + trackRectangle.X));
         }
         /* Summary */
         // Event Handlers For the Slider.
-        // Determine whether the user has clicked the track bar thumb.
+        // Moves the thumb bar to wherever use clicks on the slider.
         protected override void OnMouseDown(MouseEventArgs e)
         {
             if (!TrackBarRenderer.IsSupported)
                 return;
             if (!isEnabled)
                 return;
+
             // Check if mouse position is on the slider
             if (this.thumbRectangle.Contains(e.Location))
             {
@@ -149,18 +173,20 @@ namespace MusicApplication
                 MoveThumb(e.X);
                 MoveFillBarToThumb();
                 UpdateValue();
+                thumbChanged?.Invoke(this, e);
             }
 
             this.Invalidate();
         }
 
-        // Redraw the track bar thumb if the user has moved it.
+        // 
         protected override void OnMouseUp(MouseEventArgs e)
         {
             if (!TrackBarRenderer.IsSupported)
-            return;
+                return;
             if (!isEnabled)
                 return;
+
             if (thumbClicked == true)
             {
                 //Console.WriteLine(e.X);
@@ -169,8 +195,10 @@ namespace MusicApplication
                 {
                     thumbClicked = false;
                     thumbState = TrackBarThumbState.Hot;
+                    thumbChanged?.Invoke(this, e);
                     this.Invalidate();
                 }
+                // Call event thumb changed
 
                 thumbClicked = false;
             }
@@ -207,19 +235,19 @@ namespace MusicApplication
         // Set value to percentage out of 100
         public void SetValue(float currentDuration, float totalDuration)
         {
-            Console.WriteLine(currentDuration + " " + totalDuration);
+            //Console.WriteLine(currentDuration + " " + totalDuration);
             // Get Percentage of input
             float percent;
             percent = currentDuration / totalDuration;
 
             this.value = percent * 100;
-            Console.WriteLine(percent + " --> " + value);
+            //Console.WriteLine(percent + " --> " + value);
             this.Invalidate();
             MoveFillBarToThumb();
         }
         public void MoveSliderToValue() 
         {
-            Console.WriteLine("Adjust Slider to new value");
+            //Console.WriteLine("Adjust Slider to new value");
             float positionOnTrack = trackRectangle.Width * (this.value / 100);
             thumbRectangle.X = trackRectangle.X + (int)positionOnTrack;
         }

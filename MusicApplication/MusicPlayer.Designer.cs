@@ -37,7 +37,6 @@
             this.PauseButton = new System.Windows.Forms.Button();
             this.NextButton = new System.Windows.Forms.Button();
             this.PrevButton = new System.Windows.Forms.Button();
-            this.SongProgressBar = new System.Windows.Forms.TrackBar();
             this.SongTitleLabel = new System.Windows.Forms.Label();
             this.SelectMusicFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.SongTimer = new System.Windows.Forms.Timer(this.components);
@@ -46,7 +45,6 @@
             this.MusicDirectoryButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.MusicPicture)).BeginInit();
             this.MusicControllerPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SongProgressBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,7 +74,6 @@
             this.MusicControllerPanel.Controls.Add(this.PauseButton);
             this.MusicControllerPanel.Controls.Add(this.NextButton);
             this.MusicControllerPanel.Controls.Add(this.PrevButton);
-            this.MusicControllerPanel.Controls.Add(this.SongProgressBar);
             this.MusicControllerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.MusicControllerPanel.Location = new System.Drawing.Point(0, 477);
             this.MusicControllerPanel.Margin = new System.Windows.Forms.Padding(0);
@@ -149,23 +146,6 @@
             this.PrevButton.Text = "Prev";
             this.PrevButton.UseVisualStyleBackColor = true;
             this.PrevButton.Click += new System.EventHandler(this.PrevButton_Click_1);
-            // 
-            // SongProgressBar
-            // 
-            this.SongProgressBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(196)))), ((int)(((byte)(153)))));
-            this.SongProgressBar.Enabled = false;
-            this.SongProgressBar.LargeChange = 0;
-            this.SongProgressBar.Location = new System.Drawing.Point(108, 17);
-            this.SongProgressBar.Margin = new System.Windows.Forms.Padding(0);
-            this.SongProgressBar.Maximum = 100;
-            this.SongProgressBar.Name = "SongProgressBar";
-            this.SongProgressBar.Size = new System.Drawing.Size(577, 45);
-            this.SongProgressBar.SmallChange = 3;
-            this.SongProgressBar.TabIndex = 0;
-            this.SongProgressBar.TabStop = false;
-            this.SongProgressBar.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.SongProgressBar.Scroll += new System.EventHandler(this.SongProgressBar_Scroll);
-            this.SongProgressBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongProgressBar_MouseDown);
             // 
             // SongTitleLabel
             // 
@@ -245,7 +225,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.MusicPicture)).EndInit();
             this.MusicControllerPanel.ResumeLayout(false);
             this.MusicControllerPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SongProgressBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);
 
@@ -261,7 +240,6 @@
         private System.Windows.Forms.FolderBrowserDialog SelectMusicFolder;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
         private System.Windows.Forms.Label TotalDurationLabel;
-        private System.Windows.Forms.TrackBar SongProgressBar;
         private System.Windows.Forms.Timer SongTimer;
         private System.Windows.Forms.Label CurrentDurationLabel;
         private System.Windows.Forms.ListBox listBox1;

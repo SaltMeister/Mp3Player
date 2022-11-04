@@ -25,7 +25,8 @@ namespace MusicApplication
         }
         // Add folder music into list
         public void AddDirectoryMusic(DirectoryInfo d) 
-        {   
+        {
+            Console.WriteLine(d);
             // Access all mp3 files in directory
             FileInfo[] Files = d.GetFiles("*.mp3");
             // Access Each file

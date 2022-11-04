@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace MusicApplication
 {
+    // CONTROL THE DIRECTORY FOLDERS THAT ARE ACCESSED BY THE MUSIC LIST
     internal class DirectoryController
     {
         string documentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -23,6 +24,7 @@ namespace MusicApplication
             // Update directory path.
             filePath = documentPath + @"\\MP3Player\directory.txt";
 
+            // Read file and update directory list upon Opening.
             ReadFile();
 
             foreach (string line in musicDirectorySet) 
@@ -40,7 +42,7 @@ namespace MusicApplication
             {
                 list.Add(line);
             }
-
+                
             return list;
         }
 
