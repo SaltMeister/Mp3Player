@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DirectoryController.cs" />
     <Compile Include="MusicList.cs" />
     <Compile Include="MusicPlayer.cs">
       <SubType>Form</SubType>

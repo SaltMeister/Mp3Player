@@ -22,27 +22,24 @@ namespace MusicApplication
         private DirectoryInfo d;
         // Initialize new class for the music list to be used.
         private MusicList musicList;
+        private DirectoryController directoryController;
         SongSlider songSlider;
         // Sound variables
         //-
         private bool isPlaying = false;
         public MusicPlayer()
         {
+            directoryController = new DirectoryController();
+
             // Create new song Slider
             songSlider = new SongSlider(new Size(500, 50));
             Controls.Add(songSlider);
-
 
             d = new DirectoryInfo(@"D:\\Internet Explorer downloads\\Music");
             InitializeComponent();
             musicList = new MusicList(this);
 
             musicList.AddDirectoryMusic(d);
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
         }
 
@@ -142,6 +139,8 @@ namespace MusicApplication
             try
             {
                 axWindowsMediaPlayer1.URL = @d + @"\" + musicList.CurrentSongName();
+                isPlaying = true;
+                SongTimer.Enabled = true;
                 //SetSongPlaying();
             }
             catch
@@ -161,6 +160,7 @@ namespace MusicApplication
             {
                 axWindowsMediaPlayer1.URL = @d + @"\" + musicList.CurrentSongName();
                 isPlaying = true;
+                SongTimer.Enabled = true;
                 //SetSongPlaying();
             }
             catch
@@ -267,6 +267,11 @@ namespace MusicApplication
             UpdateSongTimers();
             //UpdateSlider();
             SetSongLabelName();
+        }
+
+        private void MusicListButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }   

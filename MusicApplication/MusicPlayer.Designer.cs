@@ -40,8 +40,10 @@
             this.SongProgressBar = new System.Windows.Forms.TrackBar();
             this.SongTitleLabel = new System.Windows.Forms.Label();
             this.SelectMusicFolder = new System.Windows.Forms.FolderBrowserDialog();
-            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.SongTimer = new System.Windows.Forms.Timer(this.components);
+            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
+            this.MusicListButton = new System.Windows.Forms.Button();
+            this.MusicDirectoryButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.MusicPicture)).BeginInit();
             this.MusicControllerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SongProgressBar)).BeginInit();
@@ -56,11 +58,11 @@
             this.MusicPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.MusicPicture.Image = ((System.Drawing.Image)(resources.GetObject("MusicPicture.Image")));
             this.MusicPicture.InitialImage = ((System.Drawing.Image)(resources.GetObject("MusicPicture.InitialImage")));
-            this.MusicPicture.Location = new System.Drawing.Point(227, 184);
+            this.MusicPicture.Location = new System.Drawing.Point(209, 28);
             this.MusicPicture.Margin = new System.Windows.Forms.Padding(0);
             this.MusicPicture.MinimumSize = new System.Drawing.Size(200, 200);
             this.MusicPicture.Name = "MusicPicture";
-            this.MusicPicture.Size = new System.Drawing.Size(321, 203);
+            this.MusicPicture.Size = new System.Drawing.Size(365, 359);
             this.MusicPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.MusicPicture.TabIndex = 1;
             this.MusicPicture.TabStop = false;
@@ -76,10 +78,10 @@
             this.MusicControllerPanel.Controls.Add(this.PrevButton);
             this.MusicControllerPanel.Controls.Add(this.SongProgressBar);
             this.MusicControllerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.MusicControllerPanel.Location = new System.Drawing.Point(0, 487);
+            this.MusicControllerPanel.Location = new System.Drawing.Point(0, 477);
             this.MusicControllerPanel.Margin = new System.Windows.Forms.Padding(0);
             this.MusicControllerPanel.Name = "MusicControllerPanel";
-            this.MusicControllerPanel.Size = new System.Drawing.Size(784, 114);
+            this.MusicControllerPanel.Size = new System.Drawing.Size(784, 124);
             this.MusicControllerPanel.TabIndex = 2;
             // 
             // CurrentDurationLabel
@@ -116,7 +118,7 @@
             // 
             this.PauseButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PauseButton.Location = new System.Drawing.Point(368, 52);
+            this.PauseButton.Location = new System.Drawing.Point(368, 62);
             this.PauseButton.Name = "PauseButton";
             this.PauseButton.Size = new System.Drawing.Size(50, 50);
             this.PauseButton.TabIndex = 2;
@@ -128,7 +130,7 @@
             // 
             this.NextButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.NextButton.Location = new System.Drawing.Point(498, 52);
+            this.NextButton.Location = new System.Drawing.Point(498, 62);
             this.NextButton.Name = "NextButton";
             this.NextButton.Size = new System.Drawing.Size(50, 50);
             this.NextButton.TabIndex = 1;
@@ -140,7 +142,7 @@
             // 
             this.PrevButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PrevButton.Location = new System.Drawing.Point(227, 52);
+            this.PrevButton.Location = new System.Drawing.Point(227, 62);
             this.PrevButton.Name = "PrevButton";
             this.PrevButton.Size = new System.Drawing.Size(50, 50);
             this.PrevButton.TabIndex = 0;
@@ -171,7 +173,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SongTitleLabel.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SongTitleLabel.Location = new System.Drawing.Point(203, 433);
+            this.SongTitleLabel.Location = new System.Drawing.Point(203, 410);
             this.SongTitleLabel.MaximumSize = new System.Drawing.Size(600, 50);
             this.SongTitleLabel.MinimumSize = new System.Drawing.Size(300, 50);
             this.SongTitleLabel.Name = "SongTitleLabel";
@@ -185,6 +187,11 @@
             // 
             this.SelectMusicFolder.HelpRequest += new System.EventHandler(this.SelectMusicFolder_HelpRequest);
             // 
+            // SongTimer
+            // 
+            this.SongTimer.Interval = 1000;
+            this.SongTimer.Tick += new System.EventHandler(this.SongTimer_Tick);
+            // 
             // axWindowsMediaPlayer1
             // 
             this.axWindowsMediaPlayer1.Enabled = true;
@@ -197,10 +204,24 @@
             this.axWindowsMediaPlayer1.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.axWindowsMediaPlayer1_OpenStateChange);
             this.axWindowsMediaPlayer1.MediaError += new AxWMPLib._WMPOCXEvents_MediaErrorEventHandler(this.axWindowsMediaPlayer1_MediaError);
             // 
-            // SongTimer
+            // MusicListButton
             // 
-            this.SongTimer.Interval = 1000;
-            this.SongTimer.Tick += new System.EventHandler(this.SongTimer_Tick);
+            this.MusicListButton.Location = new System.Drawing.Point(0, 28);
+            this.MusicListButton.Name = "MusicListButton";
+            this.MusicListButton.Size = new System.Drawing.Size(125, 87);
+            this.MusicListButton.TabIndex = 5;
+            this.MusicListButton.Text = "MusicListMenuButton";
+            this.MusicListButton.UseVisualStyleBackColor = true;
+            this.MusicListButton.Click += new System.EventHandler(this.MusicListButton_Click);
+            // 
+            // MusicDirectoryButton
+            // 
+            this.MusicDirectoryButton.Location = new System.Drawing.Point(672, 12);
+            this.MusicDirectoryButton.Name = "MusicDirectoryButton";
+            this.MusicDirectoryButton.Size = new System.Drawing.Size(100, 65);
+            this.MusicDirectoryButton.TabIndex = 6;
+            this.MusicDirectoryButton.Text = "Add Directory for Music";
+            this.MusicDirectoryButton.UseVisualStyleBackColor = true;
             // 
             // MusicPlayer
             // 
@@ -209,6 +230,8 @@
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(784, 601);
+            this.Controls.Add(this.MusicDirectoryButton);
+            this.Controls.Add(this.MusicListButton);
             this.Controls.Add(this.axWindowsMediaPlayer1);
             this.Controls.Add(this.SongTitleLabel);
             this.Controls.Add(this.MusicControllerPanel);
@@ -241,6 +264,9 @@
         private System.Windows.Forms.TrackBar SongProgressBar;
         private System.Windows.Forms.Timer SongTimer;
         private System.Windows.Forms.Label CurrentDurationLabel;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button MusicListButton;
+        private System.Windows.Forms.Button MusicDirectoryButton;
     }
 }
 
