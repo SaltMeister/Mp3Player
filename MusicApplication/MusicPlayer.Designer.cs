@@ -53,15 +53,16 @@
             this.MusicPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.MusicPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.MusicPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.MusicPicture.Image = ((System.Drawing.Image)(resources.GetObject("MusicPicture.Image")));
             this.MusicPicture.InitialImage = ((System.Drawing.Image)(resources.GetObject("MusicPicture.InitialImage")));
             this.MusicPicture.Location = new System.Drawing.Point(227, 28);
             this.MusicPicture.Margin = new System.Windows.Forms.Padding(0);
+            this.MusicPicture.MaximumSize = new System.Drawing.Size(365, 365);
             this.MusicPicture.MinimumSize = new System.Drawing.Size(200, 200);
             this.MusicPicture.Name = "MusicPicture";
             this.MusicPicture.Size = new System.Drawing.Size(365, 359);
-            this.MusicPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.MusicPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.MusicPicture.TabIndex = 1;
             this.MusicPicture.TabStop = false;
             this.MusicPicture.Click += new System.EventHandler(this.pictureBox1_Click);

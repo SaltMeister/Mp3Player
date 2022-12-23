@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.Imaging;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
@@ -204,6 +205,23 @@ namespace MusicApplication
                 UpdateSongTimers();
                 isPlaying = true;
                 Console.WriteLine(axWindowsMediaPlayer1.currentMedia.duration);
+
+                // Change song image
+                var tag = musicList.CurrentSongPic();
+                if (tag.Tag.Pictures.Length >= 1)
+                {
+                    Console.WriteLine("Display Song PICTURE");
+                    var bin = (byte[])(tag.Tag.Pictures[0].Data.Data);
+                    // Set Song Image with the size
+                    MusicPicture.Image = Image.FromStream(new MemoryStream(bin)).GetThumbnailImage(MusicPicture.Width, MusicPicture.Height, null, IntPtr.Zero);
+                }
+                else 
+                {
+                    Console.WriteLine("Song does not have image");
+                    MusicPicture.Image = MusicPicture.ErrorImage;
+                }
+                    
+
             }
             catch 
             {

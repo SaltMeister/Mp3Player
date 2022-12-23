@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 
 namespace MusicApplication
 {
@@ -48,14 +47,13 @@ namespace MusicApplication
             return musicFileNames[itr][0];
         }
         // Get Song image data TagLib.IPicture.
-        public TagLib.IPicture CurrentSongPic() 
+        public TagLib.File CurrentSongPic() 
         {
-            TagLib.IPicture p = null;
             var tag = TagLib.File.Create(CurrentSongDirectory() + @"\" + CurrentSongName());
             // Get tag data
-            if(tag.Tag.Pictures.Length >= 1)
-                p = tag.Tag.Pictures[0];
-            return p;
+            if (tag.Tag.Pictures.Length >= 1)
+                return tag;
+            return tag;
         }
         // Get Song Directory
         public string CurrentSongDirectory() 
