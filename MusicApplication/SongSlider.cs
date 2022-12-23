@@ -37,9 +37,10 @@ namespace MusicApplication
         }
         public SongSlider(Size trackBarSize)
         {
-            this.Location = new Point(108, 17);
+            //this.Dock = DockStyle.Top;
+            this.Location = new Point(0, 0);
             this.Size = trackBarSize;
-            this.BackColor = Color.DarkCyan;
+            this.BackColor = Color.LightSalmon;
 
             this.DoubleBuffered = true;
 

@@ -20,19 +20,21 @@ namespace MusicApplication
     public partial class MusicPlayer : Form
     {
         private FolderBrowserDialog folderBrowserDialog1;
-
         private string selectedPath;
+
         private DirectoryInfo d;
-        // Initialize new class for the music list to be used.
+
+
+        // Initialize new Classes that will be used.
         private MusicList musicList;
         private DirectoryController directoryController;
         private SongSlider songSlider;
+
         // Sound variables
         //-
         private bool isPlaying = false;
         public MusicPlayer()
         {
-
             directoryController = new DirectoryController();
 
             // Create new song Slider
@@ -41,9 +43,16 @@ namespace MusicApplication
             Controls.Add(songSlider);
             //MusicPicture
             d = new DirectoryInfo(@"D:\\Internet Explorer downloads\\Music");
-            InitializeComponent();
+            
             musicList = new MusicList(this);
 
+            InitializeComponent();
+            // Setting Parents
+            TotalDurationLabel.Parent = MusicControllerPanel;
+            CurrentDurationLabel.Parent = MusicControllerPanel;
+            songSlider.Parent = MusicControllerPanel;
+
+            songSlider.Location = new Point(songSlider.Parent.Width / 5, 0);
             // Pass directories for music list to use.
             foreach (string directory in directoryController.GetMusicDirectoryList()) 
             {
@@ -105,15 +114,12 @@ namespace MusicApplication
                     SongTimer.Enabled = false;
                     isPlaying = false;
                 }
-
             }
             catch 
             {
                 Console.WriteLine("Directory not found");
                 isPlaying = false;
             }
-
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
