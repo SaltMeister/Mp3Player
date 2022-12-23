@@ -37,7 +37,7 @@ namespace MusicApplication
             songSlider = new SongSlider(new Size(500, 50));
             songSlider.ThumbChanged += SliderValueChange;
             Controls.Add(songSlider);
-
+            //MusicPicture
             d = new DirectoryInfo(@"D:\\Internet Explorer downloads\\Music");
             InitializeComponent();
             musicList = new MusicList(this);
@@ -85,7 +85,7 @@ namespace MusicApplication
 
                         if (musicList.IsPlaylist())
                         {
-                            axWindowsMediaPlayer1.URL = @d + @"\" + musicList.CurrentSongName();
+                            axWindowsMediaPlayer1.URL = musicList.CurrentSongDirectory() + @"\" + musicList.CurrentSongName();
                             SetSongLabelName();
                         }
                     }
@@ -143,10 +143,10 @@ namespace MusicApplication
 
             musicList.PrevSong();
             // Media player play audio
-            Console.WriteLine("Play Music from : " + d + musicList.CurrentSongName());
+            Console.WriteLine("Play Music from : " + musicList.CurrentSongDirectory() + musicList.CurrentSongName());
             try
             {
-                axWindowsMediaPlayer1.URL = @d + @"\" + musicList.CurrentSongName();
+                axWindowsMediaPlayer1.URL = musicList.CurrentSongDirectory() + @"\" + musicList.CurrentSongName();
                 isPlaying = true;
                 SongTimer.Enabled = true;
                 //SetSongPlaying();
@@ -163,10 +163,10 @@ namespace MusicApplication
         {
             musicList.NextSong();
             // Media player play audio
-            Console.WriteLine("Play Music from : " + d + musicList.CurrentSongName());
+            Console.WriteLine("Play Music from : " + musicList.CurrentSongDirectory() + musicList.CurrentSongName());
             try
             {
-                axWindowsMediaPlayer1.URL = @d + @"\" + musicList.CurrentSongName();
+                axWindowsMediaPlayer1.URL = musicList.CurrentSongDirectory() + @"\" + musicList.CurrentSongName();
                 isPlaying = true;
                 SongTimer.Enabled = true;
                 //SetSongPlaying();
@@ -234,9 +234,14 @@ namespace MusicApplication
         public void SliderValueChange(object sender, EventArgs e) 
         {
             float newPosition = (float)axWindowsMediaPlayer1.currentMedia.duration * (songSlider.GetValue()/100);
+
             Console.WriteLine("UPDATED SLIDER EVENT CALLED");
             Console.WriteLine(axWindowsMediaPlayer1.Ctlcontrols.currentPosition + " " + newPosition);
             axWindowsMediaPlayer1.Ctlcontrols.currentPosition = newPosition;
+                        // Set Song Slider position
+            songSlider.SetValue((float)axWindowsMediaPlayer1.Ctlcontrols.currentPosition, (float)axWindowsMediaPlayer1.currentMedia.duration);
+            songSlider.MoveSliderToValue();
+            UpdateSongTimers();
         }
 
         // Changed to ui when new song plays

@@ -40,9 +40,9 @@
             this.SongTitleLabel = new System.Windows.Forms.Label();
             this.SelectMusicFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.SongTimer = new System.Windows.Forms.Timer(this.components);
-            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.MusicListButton = new System.Windows.Forms.Button();
             this.MusicDirectoryButton = new System.Windows.Forms.Button();
+            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             ((System.ComponentModel.ISupportInitialize)(this.MusicPicture)).BeginInit();
             this.MusicControllerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
@@ -56,7 +56,7 @@
             this.MusicPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.MusicPicture.Image = ((System.Drawing.Image)(resources.GetObject("MusicPicture.Image")));
             this.MusicPicture.InitialImage = ((System.Drawing.Image)(resources.GetObject("MusicPicture.InitialImage")));
-            this.MusicPicture.Location = new System.Drawing.Point(209, 28);
+            this.MusicPicture.Location = new System.Drawing.Point(227, 28);
             this.MusicPicture.Margin = new System.Windows.Forms.Padding(0);
             this.MusicPicture.MinimumSize = new System.Drawing.Size(200, 200);
             this.MusicPicture.Name = "MusicPicture";
@@ -172,18 +172,6 @@
             this.SongTimer.Interval = 1000;
             this.SongTimer.Tick += new System.EventHandler(this.SongTimer_Tick);
             // 
-            // axWindowsMediaPlayer1
-            // 
-            this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(227, 3);
-            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
-            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(182, 77);
-            this.axWindowsMediaPlayer1.TabIndex = 4;
-            this.axWindowsMediaPlayer1.TabStop = false;
-            this.axWindowsMediaPlayer1.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.axWindowsMediaPlayer1_OpenStateChange);
-            this.axWindowsMediaPlayer1.MediaError += new AxWMPLib._WMPOCXEvents_MediaErrorEventHandler(this.axWindowsMediaPlayer1_MediaError);
-            // 
             // MusicListButton
             // 
             this.MusicListButton.Location = new System.Drawing.Point(0, 28);
@@ -203,9 +191,22 @@
             this.MusicDirectoryButton.Text = "Add Directory for Music";
             this.MusicDirectoryButton.UseVisualStyleBackColor = true;
             // 
+            // axWindowsMediaPlayer1
+            // 
+            this.axWindowsMediaPlayer1.Enabled = true;
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(227, 3);
+            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
+            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(182, 77);
+            this.axWindowsMediaPlayer1.TabIndex = 4;
+            this.axWindowsMediaPlayer1.TabStop = false;
+            this.axWindowsMediaPlayer1.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.axWindowsMediaPlayer1_OpenStateChange);
+            this.axWindowsMediaPlayer1.MediaError += new AxWMPLib._WMPOCXEvents_MediaErrorEventHandler(this.axWindowsMediaPlayer1_MediaError);
+            // 
             // MusicPlayer
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+            this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
@@ -217,6 +218,7 @@
             this.Controls.Add(this.MusicControllerPanel);
             this.Controls.Add(this.MusicPicture);
             this.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "MusicPlayer";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;

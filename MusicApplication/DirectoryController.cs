@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MusicApplication
 {
-    // CONTROL THE DIRECTORY FOLDERS THAT ARE ACCESSED BY THE MUSIC LIST
+    // CONTROL THE DIRECTORY FOLDERS THAT ARE ACCESSED BY THE MUSIC LIST FROM FILE
     internal class DirectoryController
     {
         string documentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
