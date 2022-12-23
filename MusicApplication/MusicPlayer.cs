@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
+using TagLib.IFD;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
@@ -128,19 +129,6 @@ namespace MusicApplication
         // Intend to go to previous song
         private void PrevButton_Click_1(object sender, EventArgs e)
         {
-            // Folder extraction code
-            /*            Console.WriteLine("Open the folder");
-            this.folderBrowserDialog1 = new FolderBrowserDialog();
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                this.selectedPath = folderBrowserDialog1.SelectedPath;
-                Console.WriteLine(selectedPath);
-                // Set Directory Path
-                d = new DirectoryInfo(this.selectedPath);
-
-                // Call MusicList to add music to it.
-                musicList.AddDirectoryMusic(d);
-            }*/
 
             musicList.PrevSong();
             // Media player play audio
@@ -220,8 +208,6 @@ namespace MusicApplication
                     Console.WriteLine("Song does not have image");
                     MusicPicture.Image = MusicPicture.ErrorImage;
                 }
-                    
-
             }
             catch 
             {
@@ -281,6 +267,35 @@ namespace MusicApplication
         private void MusicListButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        // Extract music from selected folder
+        private void MusicDirectoryButton_Click(object sender, EventArgs e)
+        {
+            // Folder extraction code
+            Console.WriteLine("Open the folder");
+            this.folderBrowserDialog1 = new FolderBrowserDialog();
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                this.selectedPath = folderBrowserDialog1.SelectedPath;
+                //Console.WriteLine(selectedPath);
+                // Set Directory Path
+                d = new DirectoryInfo(this.selectedPath);
+                var list = directoryController.GetMusicDirectoryList();
+                
+                // Don't add repeat Directories into the document file
+                foreach (string i in list) 
+                {
+                    if (i == d.ToString())
+                    {
+                        Console.WriteLine("Directory already accessed in folder");
+                        return;
+                    }                   
+                }
+                // Call MusicList to add music to it.
+                directoryController.AddDirectory(d.ToString());
+                musicList.AddDirectoryMusic(d);
+            }
         }
     }
 }   

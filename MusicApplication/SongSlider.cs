@@ -127,7 +127,7 @@ namespace MusicApplication
             args.NewValue = value;
 
            // thumbChanged?.Invoke(this, );
-            Console.WriteLine("New Value set to: " + value + " / 100");
+            //Console.WriteLine("New Value set to: " + value + " / 100");
         }
         // VALUE CHANGED EVENT FOR THE SLIDER VALUE
         protected void ValueChanged(PlayerValueChangedEventArgs e) 
@@ -140,7 +140,7 @@ namespace MusicApplication
         // Move thumb to given X position on screen.
         private void MoveThumb(int x) 
         {
-            Console.WriteLine("Move to: " + x + " from " + trackRectangle.X + " - " + (trackRectangle.Width + trackRectangle.X));
+            //Console.WriteLine("Move to: " + x + " from " + trackRectangle.X + " - " + (trackRectangle.Width + trackRectangle.X));
             if (x > trackRectangle.X && x < trackRectangle.Width + trackRectangle.X)
                 thumbRectangle.X = x - 5;
             else if (x < trackRectangle.X) 

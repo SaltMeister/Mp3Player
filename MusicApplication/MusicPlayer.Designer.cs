@@ -191,6 +191,7 @@
             this.MusicDirectoryButton.TabIndex = 6;
             this.MusicDirectoryButton.Text = "Add Directory for Music";
             this.MusicDirectoryButton.UseVisualStyleBackColor = true;
+            this.MusicDirectoryButton.Click += new System.EventHandler(this.MusicDirectoryButton_Click);
             // 
             // axWindowsMediaPlayer1
             // 
