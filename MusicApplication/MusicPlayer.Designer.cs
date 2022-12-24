@@ -42,9 +42,11 @@
             this.SongTimer = new System.Windows.Forms.Timer(this.components);
             this.MusicListButton = new System.Windows.Forms.Button();
             this.MusicDirectoryButton = new System.Windows.Forms.Button();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             ((System.ComponentModel.ISupportInitialize)(this.MusicPicture)).BeginInit();
             this.MusicControllerPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -175,7 +177,7 @@
             // 
             // MusicListButton
             // 
-            this.MusicListButton.Location = new System.Drawing.Point(0, 28);
+            this.MusicListButton.Location = new System.Drawing.Point(647, 198);
             this.MusicListButton.Name = "MusicListButton";
             this.MusicListButton.Size = new System.Drawing.Size(125, 87);
             this.MusicListButton.TabIndex = 5;
@@ -193,10 +195,15 @@
             this.MusicDirectoryButton.UseVisualStyleBackColor = true;
             this.MusicDirectoryButton.Click += new System.EventHandler(this.MusicDirectoryButton_Click);
             // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
             // axWindowsMediaPlayer1
             // 
             this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(12, 121);
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(595, 115);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
             this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(182, 77);
@@ -229,6 +236,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.MusicPicture)).EndInit();
             this.MusicControllerPanel.ResumeLayout(false);
             this.MusicControllerPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);
 
@@ -249,6 +257,7 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button MusicListButton;
         private System.Windows.Forms.Button MusicDirectoryButton;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
     }
 }
 

@@ -29,6 +29,7 @@ namespace MusicApplication
         private MusicList musicList;
         private DirectoryController directoryController;
         private SongSlider songSlider;
+        private Container musicListContainer;
 
         // Sound variables
         //-
@@ -41,6 +42,9 @@ namespace MusicApplication
             songSlider = new SongSlider(new Size(500, 50));
             songSlider.ThumbChanged += SliderValueChange;
             Controls.Add(songSlider);
+
+            musicListContainer = new Container(new Size(500, 700));
+            Controls.Add(musicListContainer);
             //MusicPicture
             d = new DirectoryInfo(@"D:\\Internet Explorer downloads\\Music");
             
@@ -51,8 +55,8 @@ namespace MusicApplication
             TotalDurationLabel.Parent = MusicControllerPanel;
             CurrentDurationLabel.Parent = MusicControllerPanel;
             songSlider.Parent = MusicControllerPanel;
-
-            songSlider.Location = new Point(songSlider.Parent.Width / 5, 0);
+            // Set Song slider position to the correct area.
+            songSlider.Location = new Point(songSlider.Parent.Width / 5, 10);
             // Pass directories for music list to use.
             foreach (string directory in directoryController.GetMusicDirectoryList()) 
             {
@@ -270,9 +274,10 @@ namespace MusicApplication
             SetSongLabelName();
         }
 
+        // Display Music List Box
         private void MusicListButton_Click(object sender, EventArgs e)
         {
-
+            musicListContainer.ToggleActive();
         }
 
         // Extract music from selected folder

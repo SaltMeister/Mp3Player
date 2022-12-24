@@ -7,6 +7,7 @@ namespace MusicApplication
 {
     internal class SongSlider : Control
     {
+        // ADD VOLUME SLIDER
         private int trackWidth;
         private int trackHeight;
         
@@ -40,7 +41,7 @@ namespace MusicApplication
             //this.Dock = DockStyle.Top;
             this.Location = new Point(0, 0);
             this.Size = trackBarSize;
-            this.BackColor = Color.LightSalmon;
+            this.BackColor = Color.FromArgb(238, 196, 153);
 
             this.DoubleBuffered = true;
 
@@ -70,7 +71,7 @@ namespace MusicApplication
                 trackRectangle.Y = ClientRectangle.Y + 15;
                 trackRectangle.Width = trackWidth;
                 trackRectangle.Height = trackHeight;
-
+               
                 // Calculate the size of the thumb.
                 thumbRectangle.Size =
                     TrackBarRenderer.GetTopPointingThumbSize(g,

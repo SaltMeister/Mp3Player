@@ -66,6 +66,9 @@
     <Compile Include="PlayerValueChangedEventArgs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SideBarContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SongSlider.cs">
       <SubType>Component</SubType>
     </Compile>
