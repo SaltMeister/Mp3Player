@@ -31,10 +31,10 @@ namespace MusicApplication
             // Access Each file
             foreach(FileInfo file in Files) 
             {
-                Console.WriteLine(@d+@"\"+file.Name);
+                //Console.WriteLine(@d+@"\"+file.Name);
                 musicFileNames.Add(new List<string>{file.Name, d.ToString()});
             }
-            Console.WriteLine(musicFileNames.Count);
+            Console.WriteLine(musicFileNames.Count + " Songs Total in queue");
             
         }
 

@@ -29,7 +29,7 @@ namespace MusicApplication
 
             foreach (string line in musicDirectorySet) 
             {
-                Console.WriteLine(line);
+                //Console.WriteLine(line);
             }
         }
         // PUBLIC METHODS //

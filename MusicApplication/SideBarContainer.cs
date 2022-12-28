@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Reflection.Emit;
+using System.Threading;
+using System.Windows;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
 namespace MusicApplication
 {
     internal class Container : Control
     {
-        private bool isActive = false;
 
-        private Rectangle body = new Rectangle();
+        private bool isActive = false;
+        private Panel container = new Panel();
         // DIM ALL BACKGROUND
         // Show 3 boxes
         // ALL SONGS,
@@ -22,36 +24,23 @@ namespace MusicApplication
         // Initialize Control
         public Container(Size size) 
         {
-            this.Dock = DockStyle.Left;
             this.Location = new Point(0, 0);
             this.Size = size;
-            //this.BackColor = Color.FromArgb(238, 196, 153);
+            this.BringToFront();
+            this.BackColor = Color.ForestGreen;//Color.FromArgb(238, 196, 153);
+
+            container.AutoSize = false;
+            container.AutoScroll = false;
+            container.HorizontalScroll.Enabled = false;
+            container.HorizontalScroll.Visible = false;
+            container.HorizontalScroll.Maximum = 0;
+            container.VerticalScroll.Enabled = true;
+            container.VerticalScroll.Visible = true;
             Console.WriteLine("New Container Created");
-
-            SetupContainer();
+            Console.WriteLine(ClientRectangle.Size);
         }
 
-        // Create the Rectangle and initialize the containers
-        private void SetupContainer() 
-        {
-            // Create Graphics
-            using (Graphics g = this.CreateGraphics()) 
-            {
-                body.X = ClientRectangle.X;
-                body.Y = ClientRectangle.Y;
-                body.Width = ClientRectangle.Width;
-                body.Height = ClientRectangle.Height;
-            }
-        }
-
-        // Draw components
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            // Draw Background of the box
-            e.Graphics.DrawRectangle(new Pen(Color.Red, 1), body);
-            e.Graphics.FillRectangle(new SolidBrush(Color.Yellow), body);
-        }
-
+        // Toggle Display for the Panel
         public void ToggleActive() 
         {   
             // Inverse current value

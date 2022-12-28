@@ -36,27 +36,30 @@ namespace MusicApplication
         private bool isPlaying = false;
         public MusicPlayer()
         {
+            Console.WriteLine(this.Size);
             directoryController = new DirectoryController();
-
             // Create new song Slider
             songSlider = new SongSlider(new Size(500, 50));
             songSlider.ThumbChanged += SliderValueChange;
             Controls.Add(songSlider);
-
-            musicListContainer = new Container(new Size(500, 700));
+            musicListContainer = new Container(new Size(500, 640));
             Controls.Add(musicListContainer);
             //MusicPicture
             d = new DirectoryInfo(@"D:\\Internet Explorer downloads\\Music");
             
             musicList = new MusicList(this);
 
+            // SET UP COMPONENTS FOR FORMS
             InitializeComponent();
+
+
             // Setting Parents
             TotalDurationLabel.Parent = MusicControllerPanel;
             CurrentDurationLabel.Parent = MusicControllerPanel;
             songSlider.Parent = MusicControllerPanel;
             // Set Song slider position to the correct area.
             songSlider.Location = new Point(songSlider.Parent.Width / 5, 10);
+
             // Pass directories for music list to use.
             foreach (string directory in directoryController.GetMusicDirectoryList()) 
             {
@@ -307,6 +310,11 @@ namespace MusicApplication
                 directoryController.AddDirectory(d.ToString());
                 musicList.AddDirectoryMusic(d);
             }
+        }
+
+        private void SongTitleLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }   
