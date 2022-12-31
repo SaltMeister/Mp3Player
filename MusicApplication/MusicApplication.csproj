@@ -56,6 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DirectoryController.cs" />
+    <Compile Include="MusicDataBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MusicList.cs" />
     <Compile Include="MusicPlayer.cs">
       <SubType>Form</SubType>

@@ -36,12 +36,12 @@ namespace MusicApplication
         private bool isPlaying = false;
         public MusicPlayer()
         {
-            Console.WriteLine(this.Size);
             directoryController = new DirectoryController();
             // Create new song Slider
             songSlider = new SongSlider(new Size(500, 50));
             songSlider.ThumbChanged += SliderValueChange;
             Controls.Add(songSlider);
+
             musicListContainer = new Container(new Size(500, 640));
             Controls.Add(musicListContainer);
             //MusicPicture
@@ -49,6 +49,8 @@ namespace MusicApplication
             
             musicList = new MusicList(this);
 
+            //
+            musicListContainer.DisplayMusicList();
             // SET UP COMPONENTS FOR FORMS
             InitializeComponent();
 

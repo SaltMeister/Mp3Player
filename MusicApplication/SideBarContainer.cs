@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Reflection.Emit;
@@ -26,7 +27,7 @@ namespace MusicApplication
         {
             this.Location = new Point(0, 0);
             this.Size = size;
-            this.BringToFront();
+
             this.BackColor = Color.ForestGreen;//Color.FromArgb(238, 196, 153);
 
             container.AutoSize = false;
@@ -37,9 +38,22 @@ namespace MusicApplication
             container.VerticalScroll.Enabled = true;
             container.VerticalScroll.Visible = true;
             Console.WriteLine("New Container Created");
-            Console.WriteLine(ClientRectangle.Size);
         }
+        public void DisplayMusicList() //List<List<string>> x
+        {
+            MusicDataBox musicData = new MusicDataBox(5, new Point(0, 0));
+            Console.WriteLine(musicData.IndexOfSong + " first box");
+            this.Controls.Add(musicData);
+            musicData.Parent = this;
+            //
+            musicData = new MusicDataBox(2, new Point(0, 50));
+            Console.WriteLine(musicData.IndexOfSong + " 2nd box");
+            musicData.Parent = this;
+            // Create music data box that when clicked creates
+            // an event in MUSIC PLAYER to change the current song
+            // to the selcted index
 
+        }
         // Toggle Display for the Panel
         public void ToggleActive() 
         {   
