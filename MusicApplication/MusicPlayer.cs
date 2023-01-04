@@ -49,8 +49,6 @@ namespace MusicApplication
             
             musicList = new MusicList(this);
 
-            //
-            musicListContainer.DisplayMusicList();
             // SET UP COMPONENTS FOR FORMS
             InitializeComponent();
 
@@ -65,10 +63,15 @@ namespace MusicApplication
             // Pass directories for music list to use.
             foreach (string directory in directoryController.GetMusicDirectoryList()) 
             {
+                Console.WriteLine(directory);
                 DirectoryInfo d = new DirectoryInfo(directory);
                 if(d.Exists)
                     musicList.AddDirectoryMusic(d);
             }
+            // Place after musicList is updated
+            // GET MUSIC LIST 3d array.
+            musicListContainer.DisplayMusicList(musicList.GetSongList());
+
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

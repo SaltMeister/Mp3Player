@@ -11,7 +11,7 @@ namespace MusicApplication
 {
     internal class Container : Control
     {
-
+        public event EventHandler<SelectedSongEventArgs> songSelected;
         private bool isActive = false;
         private Panel container = new Panel();
         // DIM ALL BACKGROUND
@@ -39,16 +39,19 @@ namespace MusicApplication
             container.VerticalScroll.Visible = true;
             Console.WriteLine("New Container Created");
         }
-        public void DisplayMusicList() //List<List<string>> x
+        public void DisplayMusicList(List<List<string>> x) //List<List<string>> x
         {
-            MusicDataBox musicData = new MusicDataBox(5, new Point(0, 0));
-            Console.WriteLine(musicData.IndexOfSong + " first box");
-            this.Controls.Add(musicData);
-            musicData.Parent = this;
-            //
-            musicData = new MusicDataBox(2, new Point(0, 50));
-            Console.WriteLine(musicData.IndexOfSong + " 2nd box");
-            musicData.Parent = this;
+            int i = 0;
+            int offset = 0;
+            Console.WriteLine(x.Count);
+            foreach(List<string> pair in x) 
+            {
+                MusicDataBox musicData = new MusicDataBox(i, new Point(0, offset), pair);
+                this.Controls.Add(musicData);
+                musicData.Parent = this;
+                i++;
+                offset += 50;
+            }
             // Create music data box that when clicked creates
             // an event in MUSIC PLAYER to change the current song
             // to the selcted index
@@ -64,6 +67,12 @@ namespace MusicApplication
                 this.Hide();
             else
                 this.Show();
+        }
+
+        // EVENT WHEN ONE OF THE DISPLAYED SONGS ARE 
+        private void OnSongSelected(object sender, SelectedSongEventArgs e) 
+        {
+            Console.WriteLine("SONG SELECTED - =" + e.SongIndex);
         }
     }
 }

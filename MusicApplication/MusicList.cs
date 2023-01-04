@@ -37,7 +37,11 @@ namespace MusicApplication
             Console.WriteLine(musicFileNames.Count + " Songs Total in queue");
             
         }
-
+        // Returns the music list
+        public List<List<string>> GetSongList() 
+        {
+            return musicFileNames;
+        }
         // Return current song title.
         public string CurrentSongName() 
         {

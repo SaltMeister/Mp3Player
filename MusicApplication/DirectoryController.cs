@@ -105,14 +105,14 @@ namespace MusicApplication
             // Write Directory into file
             using (StreamWriter sw = File.AppendText(filePath))
             {
-                if (musicDirectorySet.TryGetValue(@"D:\\Internet Explorer downloads\\Music", out string t))
+                if (musicDirectorySet.TryGetValue(@"D:\Internet Explorer downloads\Music", out string t))
                 {
                     Console.WriteLine("Directory already in file");
                 }
                 else
                 {
                     Console.WriteLine("Added Directory to file");
-                    sw.WriteLine(@"D:\\Internet Explorer downloads\\Music");
+                    sw.WriteLine(@"D:\Internet Explorer downloads\Music");
                 }
                 sw.Close();
             }
