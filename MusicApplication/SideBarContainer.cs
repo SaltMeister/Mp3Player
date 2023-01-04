@@ -50,7 +50,7 @@ namespace MusicApplication
                 this.Controls.Add(musicData);
                 musicData.Parent = this;
                 i++;
-                offset += 50;
+                offset += 81;
             }
             // Create music data box that when clicked creates
             // an event in MUSIC PLAYER to change the current song

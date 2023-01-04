@@ -6,12 +6,11 @@ using System.Windows.Forms.VisualStyles;
 
 namespace MusicApplication
 {
-    internal class MusicDataBox : Button
+    internal class MusicDataBox : Panel
     {
         private Label titleLabel;
         private Label artistLabel;
-        private Label albumLabel;
-        private Label durationLabel;
+
 
         private int indexOfSong;
 
@@ -26,18 +25,23 @@ namespace MusicApplication
 
             this.titleLabel = new Label();
             this.titleLabel.Text = tag.Tag.Title;
-            this.titleLabel.Size = new Size(50, 20);
+            this.titleLabel.Size = new Size(400, 40);
             this.titleLabel.Location = new Point(0, 0);
+            this.titleLabel.Font = new Font("Cambria", 17, FontStyle.Regular);
             this.titleLabel.Parent = this;
-            //this.artistLabel = new Label();
-            //this.albumLabel = new Label();
-            //this.durationLabel = new Label();
+            this.titleLabel.BackColor = Color.Transparent;
 
-            //titleLabel.Text = "Title";
-            //artistLabel.Text = "Artist";
-           // albumLabel.Text = "Album";
-            //durationLabel.Text = "Duration";
-           
+            this.artistLabel = new Label();
+            // Artists
+            this.artistLabel.Text = tag.Tag.FirstPerformer;
+            this.artistLabel.Size = new Size(400, 30);
+            this.artistLabel.Location = new Point(20, 41);
+            this.artistLabel.Font = new Font("Cambria", 10, FontStyle.Italic);
+            this.artistLabel.Parent = this;
+            this.artistLabel.BackColor = Color.Transparent;
+            
+            titleLabel.BringToFront();
+
             // Set song index.
             this.indexOfSong = i;
             Console.WriteLine("NEW BOX CREATED FOR MUSIC DATA");
@@ -54,7 +58,7 @@ namespace MusicApplication
 
         protected override void OnParentChanged(EventArgs e)
         {
-            this.Size = new Size(Parent.Width, 45);
+            this.Size = new Size(Parent.Width, 80);
         }
         protected void SongSelected(SelectedSongEventArgs e)
         {

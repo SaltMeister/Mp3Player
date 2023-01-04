@@ -63,7 +63,6 @@ namespace MusicApplication
             // Pass directories for music list to use.
             foreach (string directory in directoryController.GetMusicDirectoryList()) 
             {
-                Console.WriteLine(directory);
                 DirectoryInfo d = new DirectoryInfo(directory);
                 if(d.Exists)
                     musicList.AddDirectoryMusic(d);
