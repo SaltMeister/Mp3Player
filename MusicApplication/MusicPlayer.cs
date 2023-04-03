@@ -42,7 +42,7 @@ namespace MusicApplication
             songSlider.ThumbChanged += SliderValueChange;
             Controls.Add(songSlider);
 
-            musicListContainer = new Container(new Size(500, 640));
+            musicListContainer = new Container(new Size(300, 500));
             Controls.Add(musicListContainer);
             //MusicPicture
             d = new DirectoryInfo(@"D:\\Internet Explorer downloads\\Music");
@@ -200,7 +200,6 @@ namespace MusicApplication
             // Change total duration text on change
             try
             {
-                Console.WriteLine("SongSWiTCHED");
                 // Ignore Calls when song length is 0.
                 if (axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration == 0)
                     return;
@@ -209,7 +208,6 @@ namespace MusicApplication
                 SetSongPlaying();
                 UpdateSongTimers();
                 isPlaying = true;
-                Console.WriteLine(axWindowsMediaPlayer1.currentMedia.duration);
 
                 // Change song image
                 var tag = musicList.CurrentSongPic();

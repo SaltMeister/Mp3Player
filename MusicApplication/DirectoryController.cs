@@ -123,6 +123,9 @@ namespace MusicApplication
         {
             using (StreamWriter sw = File.AppendText(filePath)) 
             {
+                // Create new line;
+                sw.WriteLine();
+                Console.WriteLine("Wrote to text file");
                 sw.WriteLine(path);
                 sw.Close();
             }

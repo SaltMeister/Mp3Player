@@ -15,12 +15,13 @@ namespace MusicApplication
         private int indexOfSong;
 
         // CREATE MUSIC BOX WITH SPECIFIED INDEX OF THE SONG IN LIST.
-        public MusicDataBox(int i, Point position, List<string> x) 
+        public MusicDataBox(int i,Size size, List<string> x) 
         {
             this.BackColor = Color.GhostWhite;
-            this.Location = position;
-            this.Size = new Size(0, 0);
+            this.Location= new Point(0, 0);
+            this.Size = size;
 
+            // Need error detection
             var tag = TagLib.File.Create(x[1] + @"\" + x[0]);
 
             this.titleLabel = new Label();
@@ -44,7 +45,6 @@ namespace MusicApplication
 
             // Set song index.
             this.indexOfSong = i;
-            Console.WriteLine("NEW BOX CREATED FOR MUSIC DATA");
             // Stack 
            
             this.BringToFront();
@@ -58,7 +58,8 @@ namespace MusicApplication
 
         protected override void OnParentChanged(EventArgs e)
         {
-            this.Size = new Size(Parent.Width, 80);
+            Console.WriteLine("Update Box Size");
+            //this.Size = new Size(Parent.Width, 80);
         }
         protected void SongSelected(SelectedSongEventArgs e)
         {
